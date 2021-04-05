@@ -80,7 +80,7 @@ inline void reprint_integer(int n)
     // see https://stackoverflow.com/questions/18006748/using-putchar-unlocked-for-fast-output
     if (n == 0) {
         putchar_unlocked('0');
-    } else {
+    } else if (n > 0) {
         int reverse = n, zeroes_count = 0;
         while ((reverse % 10) == 0) {
             ++zeroes_count;
@@ -99,6 +99,8 @@ inline void reprint_integer(int n)
             putchar_unlocked('0');
         }
     }
+    // CSI_EMPTY_VALUE is -1; negative numbers are not supported in escape codes,
+    // so we don't have to do anything if passed number is negative
 }
 
 void reprint_sequence(ansi_sequence *sequence)
