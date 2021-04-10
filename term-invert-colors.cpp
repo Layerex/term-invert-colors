@@ -177,6 +177,25 @@ int main(int argc, char *argv[])
                 invert_216_background = true;
             } else if (!strcmp(argv[i], "-216fg")) {
                 invert_216_foreground = true;
+            } else if (!strcmp(argv[i], "-256")) {
+                invert_standart_background = true;
+                invert_standart_foreground = true;
+                invert_bright_background = true;
+                invert_bright_foreground = true;
+                invert_grayscale_background = true;
+                invert_grayscale_foreground = true;
+                invert_216_background = true;
+                invert_216_foreground = true;
+            } else if (!strcmp(argv[i], "-256bg")) {
+                invert_standart_background = true;
+                invert_bright_background = true;
+                invert_grayscale_background = true;
+                invert_216_background = true;
+            } else if (!strcmp(argv[i], "-256fg")) {
+                invert_standart_foreground = true;
+                invert_bright_foreground = true;
+                invert_grayscale_foreground = true;
+                invert_216_foreground = true;
             } else if (!strcmp(argv[i], "-grayscale")) {
                 invert_grayscale_background = true;
                 invert_grayscale_foreground = true;
