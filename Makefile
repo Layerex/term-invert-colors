@@ -8,3 +8,5 @@ install: all
 
 clean:
 	rm -f term-invert-colors
+
+.PHONY: all install clean
