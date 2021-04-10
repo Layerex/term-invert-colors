@@ -10,8 +10,21 @@ static bool invert_standart_background = false, invert_standart_foreground = fal
             invert_rgb_background = false, invert_rgb_foreground = false;
 
 static const char usage[] =
-        "Usage: %s [-bg -fg -8 -8bg -8fg -b8 -b8bg -b8fg -16 -16bg -16fg -216 "
-        "-216bg -216fg -grayscale -grayscalebg -grayscalefg -rgb -rgbbg -rgbfg]\n";
+        "Usage: %s [-bg -fg -8 -8bg -8fg -b8 -b8bg -b8fg -16 -16bg -16fg -216 -216bg -216fg "
+        "-grayscale -grayscalebg -grayscalefg -256 -256bg -256fg -rgb -rgbbg -rgbfg]\n"
+        "Options specify which colors to invert. By default all colors all inverted. bg and fg "
+        "suffixes specify whether to invert only background or only foreground colors "
+        "respectively.\n"
+        "-fg        All foreground colors.\n"
+        "-bg        All background colors.\n"
+        "-8         8 standart colors.\n"
+        "-8b        8 bright colors.\n"
+        "-16        All colors of 16-color palette. Equal to -8 -8b.\n"
+        "-216       216 colors of color cube of 256-color palette.\n"
+        "-grayscale 24 shades of gray of 256-color palette.\n"
+        "-256       All colors of 256-color palette. Equal to -16 -216 -grayscale.\n"
+        "-rgb       All rgb colors.\n"
+        "Take a look at https://en.wikipedia.org/wiki/ANSI_escape_code if in doubt.\n";
 
 inline int invert_color(int color, int palette_lower_bound, int palette_upper_bound)
 {
