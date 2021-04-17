@@ -28,7 +28,3 @@ Options specify which colors to invert. By default all colors all inverted. bg a
 -rgb       All rgb colors.
 Take a look at https://en.wikipedia.org/wiki/ANSI_escape_code#Colors if in doubt.
 ```
-
-## TODO
-
-- Fix incorrect handling of ^[(B escape code (probably requires fix in library). As a consequence most ncurses applications work even more terribly when piped.

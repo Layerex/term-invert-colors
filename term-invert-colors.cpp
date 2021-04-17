@@ -118,7 +118,6 @@ inline void reprint_integer(int n)
 
 void reprint_sequence(ansi_sequence *sequence)
 {
-    putchar_unlocked(0x1B);
     putchar_unlocked('[');
     if (sequence->priv)
         putchar_unlocked(sequence->priv);
@@ -239,6 +238,11 @@ int main(int argc, char *argv[])
     // thread unsafe getchar_unlocked() is used since program operates in a single thread
     // same with putchar_unlocked()
     while ((c = getchar_unlocked()) != EOF) {
+        // Since library does not support parsing non-CSI escape codes here is a workaround to
+        // to correctly reprint escape codes library can't parse
+        if (c == 0x1B) {
+            putchar_unlocked(0x1B);
+        }
         switch (ansi_escape_parser_feed(c)) {
         case ANSI_ESCAPE_PARSE_OK:
             invert_color_sequence(ansi_parser_last_parsed);
