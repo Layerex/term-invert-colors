@@ -35,7 +35,7 @@ inline int invert_color(int color, int palette_lower_bound, int palette_upper_bo
 #define INVERT(color, palette_lower_bound, palette_upper_bound)                                    \
     color = invert_color(color, palette_lower_bound, palette_upper_bound);
 
-// invert color if needed and color is in palette; return from function on success
+// invert color if needed and color is in palette, return from function on success
 #define INVERT_IF_NEEDED(predicative, color, palette_lower_bound, palette_upper_bound)             \
     if (predicative && color >= palette_lower_bound && color <= palette_upper_bound) {             \
         INVERT(color, palette_lower_bound, palette_upper_bound)                                    \
@@ -44,7 +44,7 @@ inline int invert_color(int color, int palette_lower_bound, int palette_upper_bo
 
 void invert_color_sequence(ansi_sequence *sequence)
 {
-    // if not a SGR we have nothing to do here
+    // if not a SGR, we have nothing to do here
     if (sequence->mode == 'm') {
         switch (sequence->values->size()) {
         case 1:
@@ -56,9 +56,8 @@ void invert_color_sequence(ansi_sequence *sequence)
             break;
         case 3:
             // 256 color palette
-            // check if escape code is really setting a 8-bit color
+            // check if escape code is really setting an 8-bit color
             if (sequence->values->at(1) == 5) {
-                // background
                 if (sequence->values->at(0) == 48) {
                     INVERT_IF_NEEDED(invert_standart_background, sequence->values->at(2), 0, 7)
                     INVERT_IF_NEEDED(invert_bright_background, sequence->values->at(2), 8, 15)
@@ -74,7 +73,7 @@ void invert_color_sequence(ansi_sequence *sequence)
             break;
         case 5:
             // rgb
-            // check if escape code is really setting an rgb color
+            // check if escape code is really setting a rgb color
             if (sequence->values->at(1) == 2) {
                 if ((sequence->values->at(0) == 48 && invert_rgb_background)
                     || (sequence->values->at(0) == 38 && invert_rgb_foreground)) {
@@ -131,7 +130,7 @@ void reprint_sequence(ansi_sequence *sequence)
 
 int main(int argc, char *argv[])
 {
-    // if no args then invert everything
+    // if no args, then invert everything
     if (argc <= 1) {
         invert_standart_background = true;
         invert_standart_foreground = true;
@@ -238,8 +237,9 @@ int main(int argc, char *argv[])
     // thread unsafe getchar_unlocked() is used since program operates in a single thread
     // same with putchar_unlocked()
     while ((c = getchar_unlocked()) != EOF) {
-        // Since library does not support parsing non-CSI escape codes here is a workaround to
+        // since library does not support parsing non-CSI escape codes, here is a workaround to
         // to correctly reprint escape codes library can't parse
+        // ideally, this should be reprinted in reprint_sequence function
         if (c == 0x1B) {
             putchar_unlocked(0x1B);
         }
