@@ -26,7 +26,7 @@ static const char usage[] =
         "-grayscale 24 shades of gray of 256-color palette.\n"
         "-256       All colors of 256-color palette. Equal to -16 -216 -grayscale.\n"
         "-rgb       All rgb colors.\n"
-        "Take a look at https://en.wikipedia.org/wiki/ANSI_escape_code if in doubt.\n";
+        "Take a look at https://en.wikipedia.org/wiki/ANSI_escape_code#Colors if in doubt.\n";
 
 inline int invert_color(int color, int palette_lower_bound, int palette_upper_bound)
 {
